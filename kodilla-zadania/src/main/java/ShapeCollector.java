@@ -4,7 +4,7 @@ public class ShapeCollector {
     //JAK ZAINICJOWAĆ ArrayList interfejsem ?
     Shape shape;
 
-
+    private ArrayList<Shape> shapes = new ArrayList<>();
     public ShapeCollector(Shape shape, ArrayList<Shape> shapes) {
         this.shape = shape;
         this.shapes = shapes;
