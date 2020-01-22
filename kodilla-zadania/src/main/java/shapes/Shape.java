@@ -1,6 +1,8 @@
+package shapes;
+
 public interface Shape {
 
-    void getShapeName();
+    String getShapeName();
 
     double getField();
 }
