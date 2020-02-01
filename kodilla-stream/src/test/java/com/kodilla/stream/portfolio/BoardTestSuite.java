@@ -138,18 +138,26 @@ public class BoardTestSuite {
         //Then
         Assert.assertEquals(2, longTask);
     }
-    //Zadanie nr 7.6
-    //@Test
-    //public void testAddTaskListAverageWorkingOnTask(){
+    /**Zadanie nr 7.6
+
+     uznałem, że najlepszą drogą do wykonia tego zadania będzie popbranie Listy inProgresTask aż do getCreated, ale
+     brakuje mi tu  getDeadline no i nie wiem jak się tym czasem obsłużyć definitywnie. Z góry dzięki za pomoc.
+     JK
+
+    @Test
+    public void testAddTaskListAverageWorkingOnTask(){
         //Given
-        //Board project = prepareTestData();
+        Board project = prepareTestData();
         //When
-       // List<TaskList> inProgressTasks = new ArrayList<>();
-       // inProgressTasks.add(new TaskList("In progress"));
-        //long longTask  = project.getTaskLists().stream()
-              //  .filter(inProgressTasks::contains)
-        //long longTaskInProgress = IntStream.range(0, project.getTaskLists().size())
-              // .filter(inProgressTasks::contains)
+       List<TaskList> inProgressTasks = new ArrayList<>();
+       inProgressTasks.add(new TaskList("In progress"));
+        long longTask  = project.getTaskLists().stream()
+                .filter(inProgressTasks::contains)
+                .flatMap(f->f.getTasks().stream())
+                .map(c->c.getCreated())
+                .filter()
+        //Then
+            */
 
 
 
