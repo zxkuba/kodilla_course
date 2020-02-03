@@ -4,7 +4,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalDouble;
@@ -12,7 +14,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class BoardTestSuite {
-
 
 
     public Board prepareTestData() {
@@ -88,23 +89,25 @@ public class BoardTestSuite {
         //Then
         Assert.assertEquals(3, project.getTaskLists().size());
     }
-        @Test
-    public void testAddTaskListFindUsersTasks(){
+
+    @Test
+    public void testAddTaskListFindUsersTasks() {
         //Given
         Board project = prepareTestData();
         //When
-            User user = new User("developer1", "John Smith");
-            List<Task> tasks = project.getTaskLists().stream()
-                    .flatMap(k->k.getTasks().stream())
-                    .filter(g->g.getAssignedUser().equals(user))
-                    .collect(Collectors.toList());
-            //Then
-            Assert.assertEquals(2, tasks.size());
-            Assert.assertEquals(user, tasks.get(0).getAssignedUser());
-            Assert.assertEquals(user, tasks.get(1).getAssignedUser());
+        User user = new User("developer1", "John Smith");
+        List<Task> tasks = project.getTaskLists().stream()
+                .flatMap(k -> k.getTasks().stream())
+                .filter(g -> g.getAssignedUser().equals(user))
+                .collect(Collectors.toList());
+        //Then
+        Assert.assertEquals(2, tasks.size());
+        Assert.assertEquals(user, tasks.get(0).getAssignedUser());
+        Assert.assertEquals(user, tasks.get(1).getAssignedUser());
     }
+
     @Test
-    public void testAddTaskListFindOutdatedTasks(){
+    public void testAddTaskListFindOutdatedTasks() {
         //Given
         Board project = prepareTestData();
         //When
@@ -113,55 +116,49 @@ public class BoardTestSuite {
         undoneTasks.add(new TaskList("In progress"));
         List<Task> tasks = project.getTaskLists().stream()
                 .filter(undoneTasks::contains)
-                .flatMap(d->d.getTasks().stream())
-                .filter(a->a.getDeadline().isBefore(LocalDate.now()))
+                .flatMap(d -> d.getTasks().stream())
+                .filter(a -> a.getDeadline().isBefore(LocalDate.now()))
                 .collect(Collectors.toList());
         //Then
         //Then
         Assert.assertEquals(1, tasks.size());
         Assert.assertEquals("HQLs for analysis", tasks.get(0).getTitle());
 
-        }
+    }
+
     @Test
-    public void testAddTaskListFindLongTasks(){
+    public void testAddTaskListFindLongTasks() {
         //Given
         Board project = prepareTestData();
         //When
         List<TaskList> inProgressTasks = new ArrayList<>();
         inProgressTasks.add(new TaskList("In progress"));
-        long longTask  = project.getTaskLists().stream()
+        long longTask = project.getTaskLists().stream()
                 .filter(inProgressTasks::contains)
-                .flatMap(f-> f.getTasks().stream())
-                .map(c-> c.getCreated())
-                .filter(r-> r.compareTo(LocalDate.now().minusDays(10)) <= 0)
+                .flatMap(f -> f.getTasks().stream())
+                .map(c -> c.getCreated())
+                .filter(r -> r.compareTo(LocalDate.now().minusDays(10)) <= 0)
                 .count();
         //Then
         Assert.assertEquals(2, longTask);
     }
-    /**Zadanie nr 7.6
 
-     uznałem, że najlepszą drogą do wykonia tego zadania będzie popbranie Listy inProgresTask aż do getCreated, ale
-     brakuje mi tu  getDeadline no i nie wiem jak się tym czasem obsłużyć definitywnie. Z góry dzięki za pomoc.
-     JK
 
     @Test
-    public void testAddTaskListAverageWorkingOnTask(){
+    public void testAddTaskListAverageWorkingOnTask() {
         //Given
         Board project = prepareTestData();
         //When
-       List<TaskList> inProgressTasks = new ArrayList<>();
-       inProgressTasks.add(new TaskList("In progress"));
-        long longTask  = project.getTaskLists().stream()
+        List<TaskList> inProgressTasks = new ArrayList<>();
+        inProgressTasks.add(new TaskList("In progress"));
+        long longTask = (long) project.getTaskLists().stream()
                 .filter(inProgressTasks::contains)
-                .flatMap(f->f.getTasks().stream())
-                .map(c->c.getCreated())
-                .filter()
+                .flatMap(f -> f.getTasks().stream())
+                .mapToLong(c -> ChronoUnit.DAYS.between(c.getCreated(), c.getDeadline()))
+                .average().orElse(0L);
         //Then
-            */
-
-
-
-
-
+        Assert.assertEquals(18, longTask);
     }
+
+}
 
