@@ -1,4 +1,4 @@
-package statistics;
+package com.kodilla.testing.statistic;
 
 import java.util.List;
 

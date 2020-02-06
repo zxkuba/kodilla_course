@@ -1,5 +1,6 @@
 package com.kodilla.testing.collection;
 
+
 import org.junit.Assert;
 import org.junit.Test;
 
