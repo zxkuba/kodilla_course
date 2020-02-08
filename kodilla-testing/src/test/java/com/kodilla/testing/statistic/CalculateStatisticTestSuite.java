@@ -130,8 +130,8 @@ public class CalculateStatisticTestSuite {
         Statistics statisticsMock = mock(Statistics.class);
         CalculateStatistic calculateStatistic = new CalculateStatistic();
         when(statisticsMock.usersNames()).thenReturn(userGenerator(0));
-        when(statisticsMock.commentsCount()).thenReturn(10);
-        when(statisticsMock.postsCount()).thenReturn(10);
+        when(statisticsMock.commentsCount()).thenReturn(1);
+        when(statisticsMock.postsCount()).thenReturn(1);
         //When
         calculateStatistic.calculateAdvStatistics(statisticsMock);
         int userCount = statisticsMock.usersNames().size();

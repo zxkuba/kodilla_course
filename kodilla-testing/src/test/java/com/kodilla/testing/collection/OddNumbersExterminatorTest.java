@@ -31,14 +31,19 @@ public class OddNumbersExterminatorTest {
     public void testOddNumbersExterminatorNormalList(){
         //Given
         OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
-        //When
         ArrayList<Integer> random = new ArrayList<>();
-        Random random1 = new Random();
-        for(int n=0; n<20; n++){
-            random.add(random1.nextInt(20));
-        }
-        ArrayList<ArrayList<Integer>> test = oddNumbersExterminator.exterminate(random);
+        random.add(5);
+        random.add(8);
+        random.add(10);
+        random.add(3);
+        //When
+        ArrayList<ArrayList<Integer>> test2 = oddNumbersExterminator.exterminate(random);
+        ArrayList<Integer> randomEven = new ArrayList<>();
+        randomEven.add(8);
+        randomEven.add(10);
         //Then
+        Assert.assertEquals(randomEven, test2);
 
+        }
     }
-}
+
