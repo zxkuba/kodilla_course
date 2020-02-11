@@ -1,16 +1,18 @@
 package com.kodilla.testing.collection;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OtherSolutionOddNumbersExterminator {
 
-    public ArrayList<Integer> exterminate2(ArrayList<Integer> numbers){
-       int temp = 0;
+    public List<Integer> exterminate2(List<Integer> numbers){
+        List<Integer> result = new ArrayList<>();
         for(int n=0; n<numbers.size(); n++){
-            temp = numbers.get(n);
+            int temp = numbers.get(n);
             if(temp % 2 == 0){
+                result.add(temp);
             }
         }
-        return numbers;
+        return result;
     }
 }
