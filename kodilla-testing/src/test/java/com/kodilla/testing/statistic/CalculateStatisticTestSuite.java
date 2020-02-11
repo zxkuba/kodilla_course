@@ -120,9 +120,9 @@ public class CalculateStatisticTestSuite {
         Assert.assertEquals(0, calculateStatistic.getUserCount());
         Assert.assertEquals(0, calculateStatistic.getPostCount());
         Assert.assertEquals(0, calculateStatistic.getCommentCount());
-        Assert.assertEquals(0, calculateStatistic.getAvgPostPerUser(), 0.01);
-        Assert.assertEquals(0, calculateStatistic.getAvgCommentPerUser(), 0.01);
-        Assert.assertEquals(0, calculateStatistic.getAvgCommentPerPost(), 0.01);
+        Assert.assertEquals(0.0, calculateStatistic.getAvgPostPerUser(), 0.01);
+        Assert.assertEquals(0.0, calculateStatistic.getAvgCommentPerUser(), 0.01);
+        Assert.assertEquals(0.0, calculateStatistic.getAvgCommentPerPost(), 0.01);
     }
 
 
